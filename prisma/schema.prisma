@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:@localhost:3306/db_antrian_digital"
+}
+
+
+
+model tbl_queue_digital {
+  id                Int        @id @default(autoincrement())
+  queueNumber       String
+  status            QueueStatus @default(PENDING)
+  clearStatus       Int
+  createdAt         DateTime   @default(now())
+  date              DateTime
+  dailyQueueNumber  Int
+
+  layanan           tbl_queue_layanan[]
+
+  notifications     tbl_notification_log[]
+}
+
+model tbl_jenis_layanan {
+  id            Int   @id @default(autoincrement())
+  jenisLayanan  String
+
+  queue         tbl_queue_layanan[]
+}
+model tbl_queue_layanan {
+  id              Int @id @default(autoincrement())
+
+  queueId         Int
+  jenisLayananId  Int
+
+  queue           tbl_queue_digital @relation(fields: [queueId], references: [id])
+  jenisLayanan    tbl_jenis_layanan @relation(fields: [jenisLayananId], references: [id])
+}
+
+model tbl_notification_log {
+id                  Int                       @id @default(autoincrement())
+queueId             Int             
+message             String              
+clearStatus         Int             
+status              NotifStatus               @default(SENT)
+createdAt           DateTime                  @default(now())
+    
+queue               tbl_queue_digital                 @relation(fields: [queueId], references: [id])
+}
+
+model tbl_daily_reset {
+  id                Int                       @id @default(autoincrement())
+  date              DateTime                  @unique
+  lastNumber        Int               
+  createdAt         DateTime                  @default(now())
+}
+
+enum QueueStatus {
+  PENDING
+  CALLED
+  DONE
+  CANCELLED
+}
+
+enum NotifStatus {
+  SENT
+  FAILED
+}
