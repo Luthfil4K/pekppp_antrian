@@ -1,7 +1,6 @@
 import api from "../lib/api";
 
 const getGuestStatus = async (id) => {
-  console.log("id: "+id)
   const res = await api.get(`/guestStatus/${id}`);
   return res.data;
 };
