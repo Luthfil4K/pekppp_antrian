@@ -5,11 +5,7 @@ import next from "next";
 import { Server } from "socket.io";
 
 
-const result = dotenv.config();
-console.log(result);
-console.log("ENV:", process.env.NEXT_PUBLIC_LOCAL_URL);
-console.log(result);
-console.log("ENV:", process.env.NEXT_PUBLIC_LOCAL_URL);
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handler = app.getRequestHandler();
