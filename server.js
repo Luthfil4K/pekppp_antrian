@@ -23,18 +23,18 @@ app.prepare().then(() => {
   global.io = io;
 
   io.on("connection", (socket) => {
-    console.log("User connected:", socket.id);
+    // console.log("User connected:", socket.id);
 
     socket.on("join-layanan", (layananId) => {
       socket.join(`layanan-${layananId}`);
     });
 
     socket.on("disconnect", () => {
-      console.log("User disconnected:", socket.id);
+      // console.log("User disconnected:", socket.id);
     });
   });
 
   httpServer.listen(3000, () => {
-    console.log("Ready on ",process.env.NEXT_PUBLIC_LOCAL_URL || "http://localhost:3000");
+    // console.log("Ready on ",process.env.NEXT_PUBLIC_LOCAL_URL || "http://localhost:3000");
   });
 });
