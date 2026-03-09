@@ -9,8 +9,7 @@ export async function GET(req, { params }) {
       include:{layanan:true}
       
     });
-    console.log("id: ", id);
-    console.log(data);
+   
 
     return Response.json(data, { status: 200 });
   } catch (error) {
