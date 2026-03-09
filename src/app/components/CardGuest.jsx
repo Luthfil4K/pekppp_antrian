@@ -31,7 +31,6 @@ const CardGuest = ({ data }) => {
     setJenisLayananId(layananId);
 
   }, [data]);
-  console.log(data ? data : "notFairy");
 
   return (
     <Card
