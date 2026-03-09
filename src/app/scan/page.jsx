@@ -21,7 +21,7 @@ const ScanPage = () => {
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("Socket connected:", socket.id);
+      // console.log("Socket connected:", socket.id);
     });
   }, []);
 
