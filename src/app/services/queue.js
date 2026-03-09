@@ -9,7 +9,6 @@ export const postQueueNumberAdmin = async (id, jenisLayananId) => {
 };
 
 export const getLatestQueue  = async() => {
-  console.log("getLatestQueueService")
   const res = await api.get(`/latest`);
   return res.data;
 };
