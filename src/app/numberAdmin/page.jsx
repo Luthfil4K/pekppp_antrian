@@ -73,7 +73,6 @@ const ScanPage = () => {
   };
 }, []);
 
-console.log(filteredQueue)
 
   return isLoading ? (
     <></>
