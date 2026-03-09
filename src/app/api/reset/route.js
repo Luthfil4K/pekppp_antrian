@@ -13,7 +13,6 @@ export async function GET(req, { params }) {
       }
     });
 
-    console.log(lastPending);
 
     const nowWITA = new Date().toLocaleString("en-US", {
       timeZone: "Asia/Makassar",
