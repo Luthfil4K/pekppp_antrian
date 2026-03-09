@@ -123,10 +123,7 @@ const RekapLayanan = () => {
     return layanan?.jenisLayananId;
   };
 
-  console.log("monthlyData");
-  console.log(monthlyData);
-  console.log(monthlyData);
-  console.log("monthlyData");
+
 
   const filteredData = monthlyData.filter((item) => {
     const date = new Date(item.createdAt);
