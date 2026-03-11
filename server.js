@@ -10,6 +10,8 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handler = app.getRequestHandler();
 
+const PORT = process.env.PORT 
+
 app.prepare().then(() => {
   const httpServer = createServer(handler);
 
@@ -34,7 +36,7 @@ app.prepare().then(() => {
     });
   });
 
-  httpServer.listen(3000, () => {
+  httpServer.listen(PORT, () => {
     // console.log("Ready on ",process.env.NEXT_PUBLIC_LOCAL_URL || "http://localhost:3000");
   });
 });
