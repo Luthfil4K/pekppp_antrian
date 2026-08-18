@@ -10,16 +10,17 @@ datasource db {
 
 
 model tbl_queue_digital {
-  id                Int        @id @default(autoincrement())
+  id                Int         @id @default(autoincrement())
   queueNumber       String
   status            QueueStatus @default(PENDING)
   clearStatus       Int
-  createdAt         DateTime   @default(now())
+  calledAt          DateTime    @default(now())
+  createdAt         DateTime    @default(now())
+  endedAt           DateTime    @default(now())
   date              DateTime
   dailyQueueNumber  Int
-
+  
   layanan           tbl_queue_layanan[]
-
   notifications     tbl_notification_log[]
 }
 
