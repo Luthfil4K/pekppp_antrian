@@ -22,7 +22,15 @@ export async function GET(req, { params }) {
         createdAt: {
           gte: awalUTC,
           lte: akhirUTC,
-        }
+        },
+        calledAt: {
+          gte: awalUTC,
+          lte: akhirUTC,
+        },
+        endedAt: {
+          gte: awalUTC,
+          lte: akhirUTC,
+        },
       },
       include: {
         layanan:true,

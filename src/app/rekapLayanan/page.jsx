@@ -49,6 +49,35 @@ const RekapLayanan = () => {
     4: "Layanan Perpustakaan",
   };
 
+  const formatWaktu = (value, createdAt) => {
+  if (!value) return "-";
+
+  const date = new Date(value);
+  const createdDate = new Date(createdAt);
+
+  const sameMinute =
+    date.getFullYear() === createdDate.getFullYear() &&
+    date.getMonth() === createdDate.getMonth() &&
+    date.getDate() === createdDate.getDate() &&
+    date.getHours() === createdDate.getHours() &&
+    date.getMinutes() === createdDate.getMinutes();
+
+  if (sameMinute) return "-";
+
+  const tanggal = date.toLocaleDateString("id-ID", {
+    timeZone: "Asia/Makassar",
+  });
+
+  const waktu = date.toLocaleTimeString("id-ID", {
+    timeZone: "Asia/Makassar",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  return `${tanggal}, ${waktu} WITA`;
+};
+
   const columns = [
     {
       field: "id_no",
@@ -92,28 +121,44 @@ const RekapLayanan = () => {
     },
 
     {
-  field: "createdAt",
-  headerName: "Tanggal",
-  width: 220,
-  valueFormatter: (value) => {
-    if (!value) return "-";
+      field: "createdAt",
+      headerName: "Waktu Pengunjung Datang",
+      width: 220,
+      valueFormatter: (value) => {
+        if (!value) return "-";
 
-    const date = new Date(value);
+        const date = new Date(value);
 
-    const tanggal = date.toLocaleDateString("id-ID", {
-      timeZone: "Asia/Makassar",
-    });
+        const tanggal = date.toLocaleDateString("id-ID", {
+          timeZone: "Asia/Makassar",
+        });
 
-    const waktu = date.toLocaleTimeString("id-ID", {
-      timeZone: "Asia/Makassar",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
+        const waktu = date.toLocaleTimeString("id-ID", {
+          timeZone: "Asia/Makassar",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
 
-    return `${tanggal}, ${waktu} WITA`;
-  },
-}
+        return `${tanggal}, ${waktu} WITA`;
+      },
+    },
+    {
+      field: "calledAt",
+      headerName: "Waktu Dilayani",
+      width: 220,
+      valueFormatter: (value, row) => {
+        return formatWaktu(value, row.createdAt);
+      },
+    },
+    {
+      field: "endedAt",
+      headerName: "Waktu Selesai Pelayanan",
+      width: 220,
+      valueFormatter: (value, row) => {
+        return formatWaktu(value, row.createdAt);
+      },
+    },
   ];
 
   const getJenisLayananId = (layanan) => {
@@ -315,7 +360,7 @@ const RekapLayanan = () => {
               </Card>
             </Grid>
           </Grid>
-          <Grid size={{ md: 12, xs: 12 }} sx={{marginBottom:4}}>
+          <Grid size={{ md: 12, xs: 12 }} sx={{ marginBottom: 4 }}>
             <Grid
               container
               spacing={2}

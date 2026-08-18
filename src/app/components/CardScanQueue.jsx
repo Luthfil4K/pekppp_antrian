@@ -191,8 +191,6 @@ export default function CardScanQueue({ dataQueue, selectedService }) {
               className="w-3 h-3 rounded-full bg-orange-400 animate-bounce"
               style={{ animationDelay: "600ms" }}
             ></div>
-          
-            
           </div>
         </div>
       </Card>

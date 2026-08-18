@@ -16,9 +16,21 @@ export async function PATCH(req, { params }) {
       );
     }
 
+    const nowWITA = new Date(
+      new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Makassar",
+      })
+    );
+
+    const created = new Date(nowWITA);
+
     const result = await prisma.tbl_queue_digital.update({
       where: { id: Number(id) },
-      data: { status: type },
+      data: {
+        status: type,
+        ...(type === "CALLED" && { calledAt: created }),
+        ...(type === "DONE" && { endedAt: created }),
+      },
     });
 
     //  Emit realtime

@@ -67,6 +67,8 @@ export async function POST(req, { params }) {
           status: "PENDING",
           dailyQueueNumber,
           createdAt: created,
+          calledAt:created,
+          endedAt:created,
           date: created,
         },
       });
