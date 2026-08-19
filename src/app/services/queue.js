@@ -1,9 +1,10 @@
 
 import api from '../lib/api';
 
-export const postQueueNumberAdmin = async (id, jenisLayananId) => {
+export const postQueueNumberAdmin = async (id, jenisLayananId,nama) => {
   const res = await api.post(`/qr/${id}`, {
-    jenisLayananId, 
+    jenisLayananId,
+    nama
   });
   return res.data;
 };

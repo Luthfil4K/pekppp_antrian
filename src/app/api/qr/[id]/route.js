@@ -4,7 +4,7 @@ export async function POST(req, { params }) {
   try {
     const { id } = await params;
     const body = await req.json();
-    const { jenisLayananId } = body;
+    const { jenisLayananId,nama } = body;
 
     if (!jenisLayananId || jenisLayananId.length === 0) {
       return Response.json(
@@ -70,6 +70,7 @@ export async function POST(req, { params }) {
           calledAt:created,
           endedAt:created,
           date: created,
+          nama: nama
         },
       });
 

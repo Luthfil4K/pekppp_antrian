@@ -1,7 +1,7 @@
 "use client";
 
 import CardServiceInside from "./CardServiceInside";
-import { Divider, Box } from "@mui/material";
+import { Divider, Box, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -37,6 +37,11 @@ const services = [
 export default function CardServiceSelect({ isModalOpen, setIsModalOpen, id }) {
   const router = useRouter();
   const [selectedService, setSelectedService] = useState([]);
+  const [nama, setNama] = useState('');
+
+  const handleChange = (event) => {
+    setNama(event.target.value);
+  };
 
   if (!isModalOpen) return null;
 
@@ -44,7 +49,7 @@ export default function CardServiceSelect({ isModalOpen, setIsModalOpen, id }) {
     if (selectedService.length === 0) return;
 
     try {
-      await postQueueNumberAdmin(id, selectedService);
+      await postQueueNumberAdmin(id, selectedService, nama);
       router.push(`${process.env.NEXT_PUBLIC_LOCAL_URL}/queue/` + id);
     } catch (error) {
       console.error("Gagal ambil antrian:", error);
@@ -59,6 +64,8 @@ export default function CardServiceSelect({ isModalOpen, setIsModalOpen, id }) {
           : [...prev, serviceId], // tambah jika belum ada
     );
   };
+
+
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
@@ -85,6 +92,25 @@ export default function CardServiceSelect({ isModalOpen, setIsModalOpen, id }) {
           ))}
         </div>
 
+        <Box sx={{ paddingTop: 3 }}>
+          <div className="grid grid-cols-1">
+            <TextField
+              id="outlined-basic"
+              label="Nama Anda"
+              variant="outlined"
+              value={nama}
+              onChange={handleChange}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '12px',
+                },
+              }}
+            />     
+          </div>
+        </Box>
+
+
+
         <Box sx={{ minHeight: 35, paddingTop: 2 }}>
           <Divider />
         </Box>
@@ -93,10 +119,9 @@ export default function CardServiceSelect({ isModalOpen, setIsModalOpen, id }) {
           onClick={handleButton}
           disabled={selectedService.length === 0}
           className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform
-            ${
-              selectedService
-                ? "bg-orange-600 hover:bg-orange-700 text-white hover:shadow-lg active:scale-95"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            ${selectedService
+              ? "bg-orange-600 hover:bg-orange-700 text-white hover:shadow-lg active:scale-95"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }
           `}
         >

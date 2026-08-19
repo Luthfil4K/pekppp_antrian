@@ -89,6 +89,11 @@ const RekapLayanan = () => {
       headerName: "ID Antrian",
       width: 180,
     },
+    {
+      field: "nama",
+      headerName: "ID Antrian",
+      width: 180,
+    },
 
     // {
     //   field: "dailyQueueNumber",

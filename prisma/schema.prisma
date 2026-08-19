@@ -19,7 +19,7 @@ model tbl_queue_digital {
   endedAt           DateTime    @default(now())
   date              DateTime
   dailyQueueNumber  Int
-  
+  nama              String
   layanan           tbl_queue_layanan[]
   notifications     tbl_notification_log[]
 }
@@ -41,14 +41,14 @@ model tbl_queue_layanan {
 }
 
 model tbl_notification_log {
-id                  Int                       @id @default(autoincrement())
-queueId             Int             
-message             String              
-clearStatus         Int             
-status              NotifStatus               @default(SENT)
-createdAt           DateTime                  @default(now())
-    
-queue               tbl_queue_digital                 @relation(fields: [queueId], references: [id])
+  id                  Int                       @id @default(autoincrement())
+  queueId             Int             
+  message             String              
+  clearStatus         Int             
+  status              NotifStatus               @default(SENT)
+  createdAt           DateTime                  @default(now())
+      
+  queue               tbl_queue_digital                 @relation(fields: [queueId], references: [id])
 }
 
 model tbl_daily_reset {
