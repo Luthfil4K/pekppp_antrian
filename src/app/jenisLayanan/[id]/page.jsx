@@ -2,7 +2,7 @@
 
 import CardServiceInside from "../../components/CardServiceInside";
 import React from "react";
-import { Divider, Box } from "@mui/material";
+import { Divider, Box, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { postQueueNumberAdmin } from "../../services/queue";
@@ -41,6 +41,16 @@ export default function CardServiceSelect({ params }) {
   const [selectedLayanan, setSelectedLayanan] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [nama, setNama] = useState('');
+
+  const handleChange = (event) => {
+    setNama(event.target.value);
+  };
+
+  if (!isModalOpen) return null;
+
+
+
   const toggleLayanan = (serviceId) => {
     setSelectedLayanan((prev) =>
       prev.includes(serviceId)
@@ -55,7 +65,7 @@ export default function CardServiceSelect({ params }) {
     try {
       setLoading(true);
 
-      await postQueueNumberAdmin(id, selectedLayanan);
+      await postQueueNumberAdmin(id, selectedLayanan, nama);
 
       router.push(`${process.env.NEXT_PUBLIC_LOCAL_URL}/queue/` + id);
     } catch (error) {
@@ -100,6 +110,23 @@ export default function CardServiceSelect({ params }) {
               />
             ))}
           </div>
+
+          <Box sx={{ paddingTop: 3 }}>
+            <div className="grid grid-cols-1">
+              <TextField
+                id="outlined-basic"
+                label="Nama Anda"
+                variant="outlined"
+                value={nama}
+                onChange={handleChange}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '12px',
+                  },
+                }}
+              />
+            </div>
+          </Box>
 
           <Box sx={{ minHeight: 35, paddingTop: 2 }}>
             <Divider />
