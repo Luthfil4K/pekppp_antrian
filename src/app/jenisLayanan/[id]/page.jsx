@@ -47,7 +47,7 @@ export default function CardServiceSelect({ params }) {
     setNama(event.target.value);
   };
 
-  if (!isModalOpen) return null;
+ 
 
 
 
