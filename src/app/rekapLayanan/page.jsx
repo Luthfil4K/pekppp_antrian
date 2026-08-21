@@ -91,7 +91,7 @@ const RekapLayanan = () => {
     },
     {
       field: "nama",
-      headerName: "ID Antrian",
+      headerName: "Nama Pengunjung",
       width: 180,
     },
 
